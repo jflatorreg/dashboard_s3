@@ -1,0 +1,217 @@
+<!doctype html>
+
+<html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Análisis del salario - Semana 3</title>
+    <link href="estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+
+<body>
+
+    <h1 id="title"><strong>Análisis del salario en términos de las características básicas del trabajador</strong></h1>
+
+    <p><iframe width="1200" height="1000" src="https://lookerstudio.google.com/embed/reporting/838a94ce-2026-4bb4-859e-d535ec52289e/page/b0HFD" frameborder="0" style="border:0" allowfullscreen></iframe></p>
+
+
+
+
+    <h1 id="-documentaci-n-tablero-de-control-"><strong>Documentación Tablero de Control</strong></h1>
+    <p><strong>Análisis del salario en términos de las Características Básicas del Trabajador.</strong>
+    Juan Felipe Latorre Gil
+    <a href="mailto:jflatorreg@unal.edu.co">jflatorreg@unal.edu.co</a></p>
+    <h2 id="1-raw-data-">1. <strong>Raw Data</strong></h2>
+    <p>La base de datos inicial con la cual se construyó el tablero de control, tenía <strong>27,936</strong> registros y <strong>17</strong> campos. Debido a que los nombres de los campos corresponden a las preguntas que se realizan en encuesta, se realizó un proceso de renombre de estas columnas con el sufijo “RAW” para indicar que ese campo hace parte de los datos entrada al modelo de datos, también se indican los tipos de datos con los que estos campos se configuraron en Data Studio a continuación se muestra dicho proceso:</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Campo Original</th>
+    <th>Campo Actual</th>
+    <th>Tipo de Dato</th>
+    <th>Descrpción</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>How old are you?</td>
+    <td>Rango_Edad_RAW</td>
+    <td>String</td>
+    <td>Rango de Edad</td>
+    </tr>
+    <tr>
+    <td>What industry   do you work in?</td>
+    <td>Industria_Trabajo_RAW</td>
+    <td>String</td>
+    <td>Industria en que trabaja</td>
+    </tr>
+    <tr>
+    <td>Job title</td>
+    <td>Nombre_Cargo_Actual_RAW</td>
+    <td>String</td>
+    <td>Nombre Cargo Actual RAW</td>
+    </tr>
+    <tr>
+    <td>If your job   title needs additional context, please clarify here:</td>
+    <td>Info_Adicional_Nombre_Cargo_RAW</td>
+    <td>String</td>
+    <td>Si el título de su trabajo necesita contexto   adicional</td>
+    </tr>
+    <tr>
+    <td>What is your   annual salary? (You&#39;ll indicate the currency in a later question. If you are   part-time or hourly, please enter an annualized equivalent -- what you would   earn if you worked the job 40 hours a week, 52 weeks a year.)</td>
+    <td>Salario_Anual_RAW</td>
+    <td>Float</td>
+    <td>Salario Anual</td>
+    </tr>
+    <tr>
+    <td>How much   additional monetary compensation do you get, if any (for example, bonuses or   overtime in an average year)? Please only include monetary compensation here,   not the value of benefits.</td>
+    <td>Info_Adicional_Ingreso_RAW</td>
+    <td>String</td>
+    <td>Si el ingreso necesita contexto adicional</td>
+    </tr>
+    <tr>
+    <td>Please indicate the currency</td>
+    <td>Ingresos_Adicionales_RAW</td>
+    <td>Float</td>
+    <td>Compensación monetaria adicional recibe</td>
+    </tr>
+    <tr>
+    <td>If   &quot;Other,&quot; please indicate the currency here:</td>
+    <td>Other_Moneda_RAW</td>
+    <td>String</td>
+    <td>Moneda Otro</td>
+    </tr>
+    <tr>
+    <td>If your income   needs additional context, please provide it here:</td>
+    <td>Info_Adicional_Ingreso_RAW</td>
+    <td>String</td>
+    <td>Si sus ingresos necesitan un contexto   adicional</td>
+    </tr>
+    <tr>
+    <td>What country do   you work in?</td>
+    <td>Pais_Trabajo_RAW</td>
+    <td>String/País</td>
+    <td>País en que trabaja</td>
+    </tr>
+    <tr>
+    <td>If you&#39;re in   the U.S., what state do you work in?</td>
+    <td>US_Estado_RAW</td>
+    <td>String</td>
+    <td>Estado si trabaja en USA</td>
+    </tr>
+    <tr>
+    <td>What city do   you work in?</td>
+    <td>Ciudad_Trabajo_RAW</td>
+    <td>String/Ciudad</td>
+    <td>Ciudad en que trabaja</td>
+    </tr>
+    <tr>
+    <td>How many years   of professional work experience do you have overall?</td>
+    <td>Años_Experencia_Total_RAW</td>
+    <td>String</td>
+    <td>Años de experiencia laboral profesional en su   campo</td>
+    </tr>
+    <tr>
+    <td>How many years   of professional work experience do you have in your field?</td>
+    <td>Años_Experencia_Campo_RAW</td>
+    <td>String</td>
+    <td>Años de experiencia laboral profesional en su   campo</td>
+    </tr>
+    <tr>
+    <td>What is your   highest level of education completed?</td>
+    <td>Nivel_Educativo_Alto_RAW</td>
+    <td>String</td>
+    <td>Nivel más alto de educación completado</td>
+    </tr>
+    <tr>
+    <td>What is your gender?</td>
+    <td>Genero_RAW</td>
+    <td>String</td>
+    <td>Genero</td>
+    </tr>
+    <tr>
+    <td>What is your   race? (Choose all that apply.)</td>
+    <td>Etnia_RAW</td>
+    <td>String</td>
+    <td>Etnia</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="-2-modelado-de-datos-"><strong>2. Modelado de Datos</strong></h2>
+    <p>En el proceso de transformación de los datos, el esfuerzo se centró en normalizar los campos <strong>Pais_Trabajo_RAW</strong> y <strong>Salario_Anual_RAW.</strong> Para esto crearon campos adicionales en Data Studio con los siguientes Scripts que se muestran a continuación.</p>
+    <ul>
+    <li>La variable Pais_Trabajo_RAW se transformó en <strong>Pais:</strong><pre><code class="lang-sql">CASE
+    WHEN TRIM(<span class="hljs-name">LOWER</span>(<span class="hljs-name">Pais_Trabajo_RAW</span>)) IN ( <span class="hljs-string">"u.s."</span>, <span class="hljs-string">"united states"</span>, <span class="hljs-string">"us"</span>, <span class="hljs-string">"america"</span>, <span class="hljs-string">"the united states"</span>, <span class="hljs-string">"the us"</span>, <span class="hljs-string">"u. s"</span>, 
+    <span class="hljs-string">"u. s."</span>, <span class="hljs-string">"u.a."</span>, <span class="hljs-string">"u.s"</span>, <span class="hljs-string">"u.s."</span>, <span class="hljs-string">"u.s&gt;"</span>, <span class="hljs-string">"u.sa"</span>, <span class="hljs-string">"ua"</span>, <span class="hljs-string">"u.s.a."</span>, <span class="hljs-string">"usa"</span>, <span class="hljs-string">"u.s.a"</span>, <span class="hljs-string">"uxz"</span>, <span class="hljs-string">"united y"</span>, <span class="hljs-string">"united statss"</span>, <span class="hljs-string">"uniteed states"</span>, 
+    <span class="hljs-string">"usa (company is based in a us territory, i work remote)"</span>, <span class="hljs-string">"usa-- virgin islands"</span>, <span class="hljs-string">"usa, but for foreign gov't"</span>, <span class="hljs-string">"uniited states"</span>, 
+    <span class="hljs-string">"unite states"</span>, <span class="hljs-string">"united states"</span>, <span class="hljs-string">"united states of america"</span>, <span class="hljs-string">"unites states"</span>, <span class="hljs-string">"usa tomorrow"</span>, <span class="hljs-string">"unitef stated"</span>, <span class="hljs-string">"united states of american"</span>, 
+    <span class="hljs-string">"united stares"</span>, <span class="hljs-string">"united state"</span>, <span class="hljs-string">"united state of america"</span>, <span class="hljs-string">"united stated"</span>, <span class="hljs-string">"united stateds"</span>, <span class="hljs-string">"united states is america"</span>, <span class="hljs-string">"unitedstates"</span>, <span class="hljs-string">"uniyed states"</span>, 
+    <span class="hljs-string">"🇺🇸 "</span>, <span class="hljs-string">"united status"</span>, <span class="hljs-string">"united sates"</span> , <span class="hljs-string">"🇺🇸"</span>, <span class="hljs-string">"isa"</span>, <span class="hljs-string">"usd"</span>, <span class="hljs-string">"united statea"</span>, <span class="hljs-string">"US govt employee overseas, country withheld"</span>, 
+    <span class="hljs-string">"united states (i work from home and my clients are all over the us/canada/pr"</span>) THEN <span class="hljs-string">"USA"</span>
+    WHEN TRIM(<span class="hljs-name">LOWER</span>(<span class="hljs-name">Pais_Trabajo_RAW</span>)) IN ( <span class="hljs-string">"united kingdom"</span>, <span class="hljs-string">"uk"</span>, <span class="hljs-string">"u.k."</span>, <span class="hljs-string">"uk, but for globally fully remote company"</span>, 
+    <span class="hljs-string">"unites kingdom"</span>) THEN <span class="hljs-string">"UK"</span>
+    WHEN TRIM(<span class="hljs-name">LOWER</span>(<span class="hljs-name">Pais_Trabajo_RAW</span>)) IN ( <span class="hljs-string">"england, uk"</span>, <span class="hljs-string">"england, united kingdom"</span>, <span class="hljs-string">"england"</span>, <span class="hljs-string">"englang"</span>, <span class="hljs-string">"england/uk"</span>, <span class="hljs-string">"england, uk."</span>,
+    <span class="hljs-string">"england, gb"</span>) THEN <span class="hljs-string">"England"</span>
+    WHEN TRIM(<span class="hljs-name">LOWER</span>(<span class="hljs-name">Pais_Trabajo_RAW</span>)) IN ( <span class="hljs-string">"spain"</span> ) THEN <span class="hljs-string">"Spain"</span>
+    WHEN TRIM(<span class="hljs-name">LOWER</span>(<span class="hljs-name">Pais_Trabajo_RAW</span>)) IN ( <span class="hljs-string">"new zealand"</span>, <span class="hljs-string">"nz"</span>, <span class="hljs-string">"from new zealand but on projects across apac"</span> ) THEN <span class="hljs-string">"New Zealand"</span>
+    WHEN TRIM(<span class="hljs-name">LOWER</span>(<span class="hljs-name">Pais_Trabajo_RAW</span>)) IN ( <span class="hljs-string">"the netherlands"</span>, <span class="hljs-string">"netherlands"</span> ) THEN <span class="hljs-string">"Netherlands"</span>
+    WHEN TRIM(<span class="hljs-name">LOWER</span>(<span class="hljs-name">Pais_Trabajo_RAW</span>)) IN ( <span class="hljs-string">"global"</span>, <span class="hljs-string">"worldwide (based in us but short term trips aroudn the world)"</span>, <span class="hljs-string">"bonus based on meeting yearly goals set w/ my supervisor"</span>,
+    <span class="hljs-string">"austria, but I work remotely for a dutch/british company"</span>, <span class="hljs-string">"international"</span>, <span class="hljs-string">"we don't get raises, we get quarterly bonuses, but they periodically asses income in the area you work, so i got a raise because a 3rd party assessment showed i was paid too little for the area we were located"</span>,
+    <span class="hljs-string">""</span>) THEN <span class="hljs-string">"Remote"</span>
+    WHEN TRIM(<span class="hljs-name">LOWER</span>(<span class="hljs-name">Pais_Trabajo_RAW</span>)) IN ( <span class="hljs-string">"canada"</span>, <span class="hljs-string">"csnada"</span>, <span class="hljs-string">"canda"</span>, <span class="hljs-string">"canadá"</span>, <span class="hljs-string">"canadw"</span>, <span class="hljs-string">"canad"</span>, <span class="hljs-string">"canada and usa"</span>, <span class="hljs-string">"canada, ottawa, ontario"</span> ) THEN <span class="hljs-string">"Canada"</span>
+    WHEN TRIM(<span class="hljs-name">LOWER</span>(<span class="hljs-name">Pais_Trabajo_RAW</span>)) IN ( <span class="hljs-string">"wales"</span>, <span class="hljs-string">"wales, uk"</span>, <span class="hljs-string">"wales (united kingdom)"</span>, <span class="hljs-string">"wales (uk)"</span> ) THEN <span class="hljs-string">"Wales"</span>
+    WHEN TRIM(<span class="hljs-name">LOWER</span>(<span class="hljs-name">Pais_Trabajo_RAW</span>)) IN ( <span class="hljs-string">"$2,175.84/year is deducted for benefits"</span>, <span class="hljs-string">"na"</span>, <span class="hljs-string">"nl"</span>, <span class="hljs-string">"y"</span>, <span class="hljs-string">"n/a (remote from wherever i want)"</span> ) THEN <span class="hljs-string">"NA"</span>
+    ELSE TRIM(<span class="hljs-name">Pais_Trabajo_RAW</span>)
+    END
+    </code></pre>
+    </li>
+    <li>La variable Salario_Anual_RAW se transformó en <strong>Salario Anual (COP)</strong>, basado en las de TMR:<pre><code class="lang-sql"><span class="hljs-keyword">CASE</span>
+    <span class="hljs-keyword">WHEN</span> Moneda_Salario_RAW = <span class="hljs-string">"USD"</span> <span class="hljs-keyword">THEN</span> Salario_Anual_RAW * <span class="hljs-number">4771.97</span>
+    <span class="hljs-keyword">WHEN</span> Moneda_Salario_RAW = <span class="hljs-string">"CAD"</span> <span class="hljs-keyword">THEN</span> Salario_Anual_RAW * <span class="hljs-number">3569.82</span>
+    <span class="hljs-keyword">WHEN</span> Moneda_Salario_RAW = <span class="hljs-string">"GBP"</span> <span class="hljs-keyword">THEN</span> Salario_Anual_RAW * <span class="hljs-number">5755.99</span>
+    <span class="hljs-keyword">WHEN</span> Moneda_Salario_RAW = <span class="hljs-string">"EUR"</span> <span class="hljs-keyword">THEN</span> Salario_Anual_RAW * <span class="hljs-number">5103.33</span>
+    <span class="hljs-keyword">WHEN</span> Moneda_Salario_RAW = <span class="hljs-string">"AUD/NZD"</span> <span class="hljs-keyword">THEN</span> Salario_Anual_RAW * <span class="hljs-number">3299.51</span>
+    <span class="hljs-keyword">WHEN</span> Moneda_Salario_RAW = <span class="hljs-string">"CHF"</span> <span class="hljs-keyword">THEN</span> Salario_Anual_RAW * <span class="hljs-number">5160.75</span>
+    <span class="hljs-keyword">WHEN</span> Moneda_Salario_RAW = <span class="hljs-string">"SEK"</span> <span class="hljs-keyword">THEN</span> Salario_Anual_RAW * <span class="hljs-number">455.51</span>
+    <span class="hljs-keyword">WHEN</span> Moneda_Salario_RAW = <span class="hljs-string">"JPY"</span> <span class="hljs-keyword">THEN</span> Salario_Anual_RAW * <span class="hljs-number">36.31</span>
+    <span class="hljs-keyword">WHEN</span> Moneda_Salario_RAW = <span class="hljs-string">"ZAR"</span> <span class="hljs-keyword">THEN</span> Salario_Anual_RAW * <span class="hljs-number">266.63</span>
+    <span class="hljs-keyword">WHEN</span> Moneda_Salario_RAW = <span class="hljs-string">"HKD"</span> <span class="hljs-keyword">THEN</span> Salario_Anual_RAW * <span class="hljs-number">607.89</span>
+    <span class="hljs-keyword">WHEN</span> Moneda_Salario_RAW = <span class="hljs-string">"Other"</span> <span class="hljs-keyword">AND</span> Other_Moneda_RAW  = <span class="hljs-string">"USD"</span> <span class="hljs-keyword">THEN</span> Salario_Anual_RAW * <span class="hljs-number">4771.97</span>
+    <span class="hljs-keyword">ELSE</span> Salario_Anual_RAW
+    <span class="hljs-keyword">END</span>
+    </code></pre>
+    </li>
+    <li>La variable Genero_RAW se transformó en <strong>Género:</strong><pre><code class="lang-sql"><span class="hljs-keyword">CASE</span>
+    <span class="hljs-keyword">WHEN</span> Genero_RAW <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">IN</span> (<span class="hljs-string">"Woman"</span>, <span class="hljs-string">"Man"</span>) <span class="hljs-keyword">THEN</span> <span class="hljs-string">"Other"</span>
+    <span class="hljs-keyword">ELSE</span> IFNULL(Genero_RAW, <span class="hljs-string">"Other"</span>)
+    <span class="hljs-keyword">END</span>
+    </code></pre>
+    </li>
+    <li>La variable Industria_Trabajo_RAW se transformó en <strong>Industria_Top_20,</strong> donde se crearon el top 20 de industrias más representadas en la población:<pre><code class="lang-sql"><span class="hljs-keyword">CASE</span>
+    <span class="hljs-keyword">WHEN</span> Industria_Trabajo_RAW <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> (<span class="hljs-string">"Computing or Tech"</span>, <span class="hljs-string">"Education (Higher Education)"</span>, <span class="hljs-string">"Nonprofits"</span>, <span class="hljs-string">"Health care"</span>,
+      <span class="hljs-string">"Government and Public Administration"</span>, <span class="hljs-string">"Accounting, Banking &amp; Finance"</span>, <span class="hljs-string">"Engineering or Manufacturing"</span>, 
+      <span class="hljs-string">"Marketing, Advertising &amp; PR"</span>, <span class="hljs-string">"Law"</span>, <span class="hljs-string">"Business or Consulting"</span>, <span class="hljs-string">"Education (Primary/Secondary)"</span>, <span class="hljs-string">"Media &amp; Digital"</span>,
+      <span class="hljs-string">"Insurance"</span>, <span class="hljs-string">"Retail"</span>, <span class="hljs-string">"Recruitment or HR"</span>, <span class="hljs-string">"Property or Construction"</span>, <span class="hljs-string">"Utilities &amp; Telecommunications"</span>, <span class="hljs-string">"Art &amp; Design"</span>, 
+      <span class="hljs-string">"Transport or Logistics"</span>, <span class="hljs-string">"Sales"</span>) <span class="hljs-keyword">THEN</span> <span class="hljs-symbol">'Other</span>'
+    <span class="hljs-keyword">ELSE</span> Industria_Trabajo_RAW
+    <span class="hljs-keyword">END</span>
+    </code></pre>
+    </li>
+    <li>La variable Nivel_Educativo_Alto_RAW se transformó en <strong>Nivel Educativo:</strong></li>
+    </ul>
+    <pre><code class="lang-sql"><span class="hljs-keyword">CASE</span>
+        <span class="hljs-keyword">WHEN</span> Nivel_Educativo_Alto_RAW <span class="hljs-keyword">in</span> (<span class="hljs-string">"Some college"</span>) <span class="hljs-keyword">THEN</span> <span class="hljs-string">"Other"</span>
+        <span class="hljs-keyword">ELSE</span> IFNULL(Nivel_Educativo_Alto_RAW, <span class="hljs-string">"Other"</span>)
+    <span class="hljs-keyword">END</span>
+    </code></pre>
+    <h2 id="-3-an-lisis-"><strong>3.  Análisis</strong></h2>
+    <p>El objetivo de esta aproximación a este conjunto de datos es poder determinar que información nos puede entregar fácilmente los datos transformados, para este acercamiento se aplicaron las ideas previas que se tienen sobre la dependencia de los salarios, como lo es que entre mayor es la cantidad de años de experiencia mayor es el salario, al igual con que con el nivel educativo y como estos dos factores están relacionados. También se analizó la diferencia de salarios dependiendo del género de la persona y su lugar de trabajo actual. </p>
+
+
+</body>
+
+
+</html>
